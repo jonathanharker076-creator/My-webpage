@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subham Biswas Portfolio & Blog</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<style>
+    /* Reset & Base */
+    * {margin:0; padding:0; box-sizing: border-box;}
+    body {font-family: 'Roboto', sans-serif; line-height: 1.6; background: #f0f2f5; color: #333;}
+    a {text-decoration: none; color: inherit;}
+    h1,h2,h3 {font-family: 'Montserrat', sans-serif; color: #1a73e8;}
+
+    /* Header */
+    header {background: #1a73e8; color: white; text-align: center; padding: 40px 20px;}
+    header p {font-size: 1.2rem; margin-top:10px;}
+
+    /* Navbar */
+    nav {display:flex; justify-content:center; background:#1565c0;}
+    nav a {color:white; padding:15px 20px; font-weight:600; transition:0.3s;}
+    nav a:hover {background:#0d47a1; border-radius:5px;}
+
+    /* Section */
+    section {padding:60px 20px; max-width:1000px; margin:auto;}
+    section h2 {margin-bottom:20px; border-bottom: 3px solid #1a73e8; display:inline-block; padding-bottom:5px;}
+    
+    /* About */
+    .skills span {display:inline-block; background:#1a73e8; color:white; padding:5px 12px; margin:5px; border-radius:5px; font-size:0.9rem;}
+    
+    /* Portfolio & Blog cards */
+    .cards {display:flex; flex-wrap:wrap; gap:20px;}
+    .card {background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); flex:1 1 280px; transition:0.3s;}
+    .card:hover {transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+    
+    /* Blog */
+    .blog-actions {margin-top:10px;}
+    .blog-actions input, .blog-actions textarea {width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;}
+    .blog-actions button {background:#1a73e8; color:white; border:none; padding:10px 15px; cursor:pointer; border-radius:5px; transition:0.3s;}
+    .blog-actions button:hover {background:#0d47a1;}
+    
+    /* Footer */
+    footer {text-align:center; padding:20px; background:#1a73e8; color:white;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Subham Biswas</h1>
+    <p>Student | Tech Enthusiast | Writer</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<!-- About Section -->
+<section id="about">
+    <h2>About Me</h2>
+    <p>Hi! I’m Subham, a student passionate about technology, writing, and learning new skills. I love creating impactful projects and sharing knowledge.</p>
+    <h3>Skills</h3>
+    <div class="skills">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>MS Word</span>
+        <span>Excel</span>
+        <span>Writing</span>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Project 1</h3>
+            <p>Simple website template for personal use.</p>
+        </div>
+        <div class="card">
+            <h3>Project 2</h3>
+            <p>Interactive notes and blog page.</p>
+        </div>
+        <div class="card">
+            <h3>Project 3</h3>
+            <p>Small web app (calculator or todo list).</p>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog">
+    <h2>Blog / Notes</h2>
+    
+    <div class="blog-actions">
+        <input type="text" id="blog-title" placeholder="Post Title">
+        <textarea id="blog-content" rows="4" placeholder="Write your post here..."></textarea>
+        <button onclick="addPost()">Add Post</button>
+    </div>
+    
+    <div id="blog-list" class="cards">
+        <!-- Blog posts will appear here -->
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: subham@example.com</p>
+    <p>Phone: 7318798785</p>
+    <p>LinkedIn: <a href="#">Your LinkedIn</a></p>
+    <p>GitHub: <a href="#">Your GitHub</a></p>
+</section>
+
+<footer>
+    &copy; 2025 Subham Biswas | All rights reserved
+</footer>
+
+<script>
+// Blog array
+let posts = [];
+
+// Add new blog post
+function addPost() {
+    const title = document.getElementById('blog-title').value.trim();
+    const content = document.getElementById('blog-content').value.trim();
+    if(title && content){
+        posts.push({title, content});
+        renderPosts();
+        document.getElementById('blog-title').value = '';
+        document.getElementById('blog-content').value = '';
+    } else {
+        alert("Please enter title and content");
+    }
+}
+
+// Remove blog post
+function removePost(index){
+    posts.splice(index,1);
+    renderPosts();
+}
+
+// Render all posts
+function renderPosts(){
+    const blogList = document.getElementById('blog-list');
+    blogList.innerHTML = '';
+    posts.forEach((post, index)=>{
+        const postCard = document.createElement('div');
+        postCard.className = 'card';
+        postCard.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>
+        <button onclick="removePost(${index})" style="margin-top:10px;background:#e53935;">Remove Post</button>`;
+        blogList.appendChild(postCard);
+    });
+}
+</script>
+
+</body>
+</html>
